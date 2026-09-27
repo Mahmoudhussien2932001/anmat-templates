@@ -1,0 +1,87 @@
+:root {
+  --navy: #0c2340;
+  --navy-soft: #163556;
+  --ink: #3c4654;
+  --muted: #6a7381;
+  --gold: #c4a35a;
+  --gold-deep: #8d7040;
+  --bg: #f4f5f7;
+  --card: #ffffff;
+  --line: #e2e6eb;
+  --line-strong: #d5dbe2;
+  --like: #145c36;
+  --like-bg: #e8f3ec;
+  --like-line: #1e7a4a;
+  --dislike: #7a3030;
+  --dislike-bg: #f8eeee;
+  --dislike-line: #9a3e3e;
+  --neutral: #2e3c4c;
+  --neutral-bg: #eef1f4;
+  --neutral-line: #5a6a7a;
+  --shadow: 0 1px 2px rgba(12, 35, 64, 0.04), 0 10px 28px rgba(12, 35, 64, 0.06);
+  --font-heading: "Manrope", "Segoe UI", sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+}
+
+.shell {
+  width: min(1180px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+@media (max-width: 700px) {
+  .shell {
+    width: min(1180px, calc(100% - 32px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
