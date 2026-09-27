@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { FORM_ENDPOINT } from "../config";
 import {
   RATING_LABELS,
   TEMPLATES,
@@ -7,31 +6,20 @@ import {
 } from "../templates";
 import TemplateFeedbackCard from "./TemplateFeedbackCard";
 
-function blankOrText(value) {
-  const trimmed = value.trim();
-  return trimmed.length > 0 ? trimmed : "—";
-}
+function buildSubmission(feedback) {
+  return {
+    templates: TEMPLATES.map((template) => {
+      const entry = feedback[template.id];
 
-function formatSubmission(feedback) {
-  const blocks = TEMPLATES.map((template) => {
-    const entry = feedback[template.id];
-
-    return [
-      "-------------------------",
-      template.title,
-      `URL: ${template.url}`,
-      `Reaction: ${RATING_LABELS[entry.rating]}`,
-      "",
-      "What they liked:",
-      blankOrText(entry.liked),
-      "",
-      "What they didn't like:",
-      blankOrText(entry.disliked),
-      "",
-    ].join("\n");
-  });
-
-  return ["ANMAT Website Templates Feedback", "", ...blocks].join("\n");
+      return {
+        title: template.title,
+        url: template.url,
+        rating: RATING_LABELS[entry.rating],
+        liked: entry.liked.trim(),
+        disliked: entry.disliked.trim(),
+      };
+    }),
+  };
 }
 
 export default function FeedbackForm() {
@@ -105,26 +93,18 @@ export default function FeedbackForm() {
     setStatus("submitting");
 
     try {
-      if (!FORM_ENDPOINT.startsWith("https://")) {
-        throw new Error("Formspree endpoint is not configured.");
-      }
-
-      const response = await fetch(FORM_ENDPOINT, {
+      const response = await fetch("/api/send-feedback", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({
-          _subject: "ANMAT Website Templates Feedback",
-          _gotcha: "",
-          feedback: formatSubmission(feedback),
-        }),
+        body: JSON.stringify(buildSubmission(feedback)),
       });
 
       const data = await response.json().catch(() => null);
 
-      if (!response.ok || data?.error) {
+      if (!response.ok || data?.success === false) {
         throw new Error("Form submission failed.");
       }
 
