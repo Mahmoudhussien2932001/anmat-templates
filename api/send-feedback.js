@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 
 const FROM_EMAIL = "ANMAT Website Feedback <onboarding@resend.dev>";
-const TO_EMAIL = "Mahmoud.hussien@anmat.sa";
+const TO_EMAIL = "mahmoud.hussien@anmat.sa";
 const SUBJECT = "ANMAT Website Templates Feedback";
 const ALLOWED_RATINGS = new Set(["Like", "Dislike", "Neutral"]);
 
@@ -23,9 +23,10 @@ function asText(value) {
 }
 
 function formatFeedbackHtml(value) {
-  const text = asText(value);
-  if (!text) return "—";
-  return escapeHtml(text).replaceAll("\r\n", "<br>").replaceAll("\n", "<br>").replaceAll("\r", "<br>");
+  return escapeHtml(asText(value))
+    .replaceAll("\r\n", "<br>")
+    .replaceAll("\n", "<br>")
+    .replaceAll("\r", "<br>");
 }
 
 function safeHttpUrl(value) {
