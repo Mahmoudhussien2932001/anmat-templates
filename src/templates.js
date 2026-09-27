@@ -2,19 +2,19 @@ export const TEMPLATES = [
   {
     id: "template1",
     title: "Template 01",
-    url: "https://anmat_template1.sa",
+    url: "https://anmat-template1.vercel.app/",
     image: "/templates/template-01.jpg",
   },
   {
     id: "template2",
     title: "Template 02",
-    url: "https://anmat_template2.sa",
+    url: "https://anmat-template2.vercel.app/",
     image: "/templates/template-02.jpg",
   },
   {
     id: "template3",
     title: "Template 03",
-    url: "https://anmat_template3.sa",
+    url: "https://anmat-template3.vercel.app/",
     image: "/templates/template-03.jpg",
   },
 ];
