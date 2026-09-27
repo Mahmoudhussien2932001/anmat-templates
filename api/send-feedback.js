@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 
-const FROM_EMAIL = "ANMAT Website Feedback <onboarding@resend.dev>";
+const FROM_EMAIL = "ANMAT Website Feedback <feedback@anmat.sa>";
 const TO_EMAIL = "mahmoud.hussien@anmat.sa";
 const SUBJECT = "ANMAT Website Templates Feedback";
 const ALLOWED_RATINGS = new Set(["Like", "Dislike", "Neutral"]);
@@ -160,7 +160,7 @@ export default async function handler(req, res) {
   try {
     const { error } = await createResend().emails.send({
       from: FROM_EMAIL,
-      to: TO_EMAIL,
+      to: [TO_EMAIL],
       subject: SUBJECT,
       html: buildEmailHtml(body.templates),
     });
